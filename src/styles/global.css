@@ -1,0 +1,271 @@
+@import "tailwindcss";
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* ------------------------------------------------------------------ */
+/*  PULSE tokens — style: editorial-greeting (taste-skill seed 1744861770) */
+/*  brand kept: warm ivory ground · forest ink/primary · electric lime accent */
+/* ------------------------------------------------------------------ */
+
+:root {
+  color-scheme: light;
+
+  /* grounds — the surface is taken from the product's world: paper-warm ivory */
+  --ground: #f6f3ea;
+  --surface: #fcfaf2;
+  --raised: #efeade;
+  --active: #ece7d8;
+  --inset: #f1ecdf;
+
+  /* lines in three steps */
+  --border: #e4dfcf;
+  --rule: #ebe5d6;
+  --control: #d4ceba;
+
+  /* ink in three tiers (all ≥ 4.5:1 on the grounds they sit on) */
+  --text: #25281f;
+  --muted: #57584a;
+  --faint: #66675a;
+
+  /* primary — deep forest green, reads as the near-black fill of this design */
+  --primary: #1e3a29;
+  --primary-ink: #f2f0e6;
+
+  /* one accent, electric lime — on data and at most one control; <2% of pixels */
+  --accent: #c8f542;
+  --accent-deep: #9ed314;
+  --accent-ink: #1a2415;
+  --accent-quiet: #eefbc9;
+
+  /* status — pale pair with dark ink of the same hue */
+  --positive: #247b50;
+  --pill-positive-bg: #dcf6e4;
+  --pill-positive-ink: #14532d;
+  --negative: #b3372c;
+  --pill-negative-bg: #fbe9e6;
+  --pill-negative-ink: #7f241c;
+  --pill-warning-bg: #fdf4d9;
+  --pill-warning-ink: #7a5b10;
+
+  /* charts */
+  --chart-grid: #e3ddcd;
+  --chart-ink: #1e3a29;
+  --chart-muted: #8a8776;
+
+  --ring-focus: #9ed314;
+
+  /* form fields stay paper with a stronger control border */
+  --field: #fcfaf2;
+
+  /* radii — soft, chosen once: cards 16, controls 12, full pills */
+  --radius-card: 16px;
+  --radius-control: 12px;
+
+  /* metrics */
+  --gap: 16px;
+  --card-pad: 24px;
+  --nav-row: 34px;
+  --control-height: 36px;
+
+  --font-sans: "Instrument Sans", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-serif: "Instrument Serif", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, "SF Mono", Menlo, monospace;
+}
+
+.dark {
+  color-scheme: dark;
+
+  --ground: #141712;
+  --surface: #1b1f18;
+  --raised: #232821;
+  --active: #262b24;
+  --inset: #191d16;
+
+  --border: #2c3128;
+  --rule: #232820;
+  --control: #4a4f44;
+
+  --text: #f1f0e6;
+  --muted: #b4b3a4;
+  --faint: #9b9a8c;
+
+  --primary: #eaeadf;
+  --primary-ink: #161a14;
+
+  --accent: #c8f542;
+  --accent-deep: #c8f542;
+  --accent-ink: #1a2415;
+  --accent-quiet: #2a3517;
+
+  /* on lime-accent screens the sign carries meaning; keep the negative pair */
+  --positive: #c8f542;
+  --pill-positive-bg: #2a3517;
+  --pill-positive-ink: #d9f77e;
+  --negative: #e5566f;
+  --pill-negative-bg: #331e24;
+  --pill-negative-ink: #f0a1b0;
+  --pill-warning-bg: #34290e;
+  --pill-warning-ink: #d8b25e;
+
+  --chart-grid: #262b24;
+  --chart-ink: #d9dccd;
+  --chart-muted: #6f7566;
+
+  --ring-focus: #c8f542;
+
+  --field: #191d16;
+}
+
+/* ------------------------------------------------------------------ */
+/*  Base                                                               */
+/* ------------------------------------------------------------------ */
+
+@theme inline {
+  --color-ground: var(--ground);
+  --color-surface: var(--surface);
+  --color-raised: var(--raised);
+  --color-active: var(--active);
+  --color-inset: var(--inset);
+  --color-edge: var(--border);
+  --color-rule: var(--rule);
+  --color-control: var(--control);
+  --color-ink: var(--text);
+  --color-muted: var(--muted);
+  --color-faint: var(--faint);
+  --color-primary: var(--primary);
+  --color-primary-ink: var(--primary-ink);
+  --color-accent: var(--accent);
+  --color-accent-deep: var(--accent-deep);
+  --color-accent-ink: var(--accent-ink);
+  --color-accent-quiet: var(--accent-quiet);
+  --color-positive: var(--positive);
+  --color-pill-positive-bg: var(--pill-positive-bg);
+  --color-pill-positive-ink: var(--pill-positive-ink);
+  --color-negative: var(--negative);
+  --color-pill-negative-bg: var(--pill-negative-bg);
+  --color-pill-negative-ink: var(--pill-negative-ink);
+  --color-pill-warning-bg: var(--pill-warning-bg);
+  --color-pill-warning-ink: var(--pill-warning-ink);
+  --color-chart-grid: var(--chart-grid);
+  --color-chart-ink: var(--chart-ink);
+  --color-chart-muted: var(--chart-muted);
+  --color-field: var(--field);
+  --color-focus-ring: var(--ring-focus);
+
+  --radius-card: var(--radius-card);
+  --radius-control: var(--radius-control);
+
+  --font-sans: var(--font-sans);
+  --font-serif: var(--font-serif);
+  --font-mono: var(--font-mono);
+}
+
+* {
+  border-color: var(--color-edge);
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background: var(--color-ground);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 14px;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overscroll-behavior: none;
+}
+
+.num,
+table,
+.kpi {
+  font-variant-numeric: tabular-nums;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-accent-ink);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-focus-ring);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+:focus:not(:focus-visible) {
+  outline: none;
+}
+
+/* dialogue / popover shadows: only what truly floats */
+.elevated {
+  box-shadow:
+    0 1px 2px rgb(28 26 16 / 0.5%),
+    0 16px 40px -12px rgb(28 26 16 / 22%);
+}
+
+.dark .elevated {
+  box-shadow:
+    0 1px 2px rgb(0 0 0 / 40%),
+    0 16px 40px -12px rgb(0 0 0 / 50%);
+}
+
+/* thin scrollbars inside panels */
+.thin-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: var(--color-control) transparent;
+}
+
+.thin-scroll::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+.thin-scroll::-webkit-scrollbar-thumb {
+  background: var(--color-control);
+  border-radius: 8px;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+
+/* the greeting — the one display size of the app */
+.greeting {
+  font-family: var(--font-serif);
+  font-size: clamp(34px, 5.4vw, 48px);
+  font-weight: 500;
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+}
+
+.greeting em {
+  font-style: italic;
+}
+
+/* the live timer's heartbeat — css-driven, not re-render driven */
+@keyframes breathe {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 1; }
+}
+
+.heartbeat {
+  animation: breathe 2s ease-in-out infinite;
+}
+
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
